@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="14/3"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp"
+        android:id="@+id/textView" />
+
+    <com.vipul.hp_hp.timelineview.TimelineView
+        android:id="@+id/time_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="35dp"
+        android:paddingBottom="35dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:marker_size="20dp"
+        app:line_size="2dp"
+        app:line="@color/colorPrimary"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/row_travel_textView_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingBottom="2dp"
+            android:text="15.00 - 17.00"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="THE HAGUE"
+            android:paddingBottom="2dp"
+            android:textAllCaps="true"
+            android:id="@+id/row_event_textview_event_name" />
+
+        <TextView
+            android:id="@+id/row_travel_textView_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:visibility="gone"
+            android:text="ART, CULTURE CENTER"/>
+
+    </LinearLayout>
+</LinearLayout>

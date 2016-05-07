@@ -18,7 +18,7 @@
         android:padding="10dp"
         android:text="TRIP VACATION"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_trip_vacation_listView"
         android:layout_below="@id/activity_trip_textView_title"
         android:layout_width="match_parent"

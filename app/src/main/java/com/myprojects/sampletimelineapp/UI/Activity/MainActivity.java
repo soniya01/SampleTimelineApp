@@ -1,19 +1,21 @@
 package com.myprojects.sampletimelineapp.UI.Activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.myprojects.sampletimelineapp.R;
 import com.myprojects.sampletimelineapp.UI.Adapter.CustomBaseAdapter;
+import com.myprojects.sampletimelineapp.UI.Adapter.RecyclerViewCustomAdapter;
 import com.myprojects.sampletimelineapp.UI.Model.Travel;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView tripListView;
+    private RecyclerView tripListView;
     private TextView tripTitle;
     private List<Travel> travelList = new ArrayList<>();
 
@@ -32,21 +34,24 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tripListView = (ListView)findViewById(R.id.activity_trip_vacation_listView);
+        tripListView = (RecyclerView)findViewById(R.id.activity_trip_vacation_listView);
         tripTitle = (TextView)findViewById(R.id.activity_trip_textView_title);
 
-        tripListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        tripListView.setLayoutManager(linearLayoutManager);
 
         setDummyTravelEventData();
-        CustomBaseAdapter baseAdapter = new CustomBaseAdapter(this, travelList);
-        tripListView.setAdapter(baseAdapter);
+        //CustomBaseAdapter baseAdapter = new CustomBaseAdapter(this, travelList);
+        RecyclerViewCustomAdapter customAdapter = new RecyclerViewCustomAdapter(this.travelList);
+        tripListView.setItemAnimator(new DefaultItemAnimator());
+        tripListView.setAdapter(customAdapter);
 
-        tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // if event view is sclicked then change the visisbilty of the text views with animation
-            }
-        });
+//        tripListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                // if event view is sclicked then change the visisbilty of the text views with animation
+//            }
+//        });
 
     }
 

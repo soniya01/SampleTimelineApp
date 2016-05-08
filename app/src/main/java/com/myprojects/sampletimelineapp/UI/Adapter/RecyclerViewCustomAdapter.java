@@ -21,13 +21,23 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
     private List<Travel> travelList;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
+        public TextView title, date, location, fromTime, toTime;
 
         public CustomViewHolder(View view, int viewType) {
             super(view);
-            //title = (TextView) view.findViewById(R.id.title);
-            //genre = (TextView) view.findViewById(R.id.genre);
-            //year = (TextView) view.findViewById(R.id.year);
+
+            if (viewType == 0){
+                title = (TextView) view.findViewById(R.id.row_travel_textview_name);
+                date = (TextView) view.findViewById(R.id.row_travel_textView_time);
+                //fromTime = (TextView) view.findViewById(R.id.row_travel_textView_time);
+
+            }else if (viewType == 1){
+                title = (TextView) view.findViewById(R.id.row_event_textview_event_name);
+                location = (TextView) view.findViewById(R.id.row_event_textView_location);
+                fromTime = (TextView) view.findViewById(R.id.row_event_textView_time);
+                date = (TextView) view.findViewById(R.id.row_event_textView_date);
+            }
+
         }
     }
 
@@ -36,7 +46,7 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         View view = null;
         LayoutInflater inflater = (LayoutInflater)parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (viewType == 0)
@@ -44,7 +54,23 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
         else if (viewType == 1)
             view = inflater.inflate(R.layout.listview_custom_event_row, parent, false);
 
-        return new CustomViewHolder(view, viewType);
+        final CustomViewHolder viewHolder = new CustomViewHolder(view, viewType);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewType == 1){
+                    if (viewHolder.location.getVisibility() == View.VISIBLE) {
+                        viewHolder.location.setVisibility(View.GONE);
+                        viewHolder.fromTime.setVisibility(View.GONE);
+                    }else {
+                        viewHolder.location.setVisibility(View.VISIBLE);
+                        viewHolder.fromTime.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
+        return viewHolder;
     }
 
     @Override

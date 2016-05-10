@@ -19,12 +19,12 @@
 
     <com.vipul.hp_hp.timelineview.TimelineView
         android:id="@+id/time_marker"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:paddingTop="35dp"
         android:paddingBottom="35dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="15dp"
+        android:layout_gravity="center_horizontal"
         app:marker_size="20dp"
         app:line_size="2dp"
         app:line="@color/colorPrimary"/>
@@ -41,7 +41,7 @@
             android:id="@+id/row_event_textView_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:paddingBottom="2dp"
             android:text="15.00 - 17.00"/>
 
@@ -49,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginTop="5dp"
             android:text="THE HAGUE"
             android:paddingBottom="2dp"
             android:textAllCaps="true"

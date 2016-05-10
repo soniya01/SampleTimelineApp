@@ -27,9 +27,9 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
             super(view);
 
             if (viewType == 0){
-                title = (TextView) view.findViewById(R.id.row_travel_textview_name);
-                date = (TextView) view.findViewById(R.id.row_travel_textView_time);
-                //fromTime = (TextView) view.findViewById(R.id.row_travel_textView_time);
+                title = (TextView) view.findViewById(R.id.row_travel_textView_title);
+                date = (TextView) view.findViewById(R.id.row_travel_textview_date);
+                fromTime = (TextView) view.findViewById(R.id.row_travel_textView_time);
 
             }else if (viewType == 1){
                 title = (TextView) view.findViewById(R.id.row_event_textview_event_name);
@@ -61,10 +61,10 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
                 if (viewType == 1){
                     if (viewHolder.location.getVisibility() == View.VISIBLE) {
                         viewHolder.location.setVisibility(View.GONE);
-                        viewHolder.fromTime.setVisibility(View.GONE);
+                        //viewHolder.fromTime.setVisibility(View.GONE);
                     }else {
                         viewHolder.location.setVisibility(View.VISIBLE);
-                        viewHolder.fromTime.setVisibility(View.VISIBLE);
+                       // viewHolder.fromTime.setVisibility(View.VISIBLE);
                     }
                 }
             }

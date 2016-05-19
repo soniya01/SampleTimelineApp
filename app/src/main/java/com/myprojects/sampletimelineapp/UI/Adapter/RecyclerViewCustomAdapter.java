@@ -1,10 +1,13 @@
 package com.myprojects.sampletimelineapp.UI.Adapter;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.myprojects.sampletimelineapp.R;
@@ -19,6 +22,7 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
 
 
     private List<Travel> travelList;
+    private int mOriginalHeight = 0;
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         public TextView title, date, location, fromTime, toTime;
@@ -26,6 +30,7 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
         public CustomViewHolder(View view, int viewType) {
             super(view);
 
+            view.setTag(this);
             if (viewType == 0){
                 title = (TextView) view.findViewById(R.id.row_travel_textView_title);
                 date = (TextView) view.findViewById(R.id.row_travel_textview_date);
@@ -57,16 +62,41 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
         final CustomViewHolder viewHolder = new CustomViewHolder(view, viewType);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
+                CustomViewHolder holder = (CustomViewHolder) v.getTag();
                 if (viewType == 1){
+                    holder.setIsRecyclable(false);
                     if (viewHolder.location.getVisibility() == View.VISIBLE) {
                         viewHolder.location.setVisibility(View.GONE);
                         //viewHolder.fromTime.setVisibility(View.GONE);
                     }else {
                         viewHolder.location.setVisibility(View.VISIBLE);
+                        //notifyItemRangeRemoved(po);
                        // viewHolder.fromTime.setVisibility(View.VISIBLE);
                     }
+                }else {
+                    holder.setIsRecyclable(true);
                 }
+
+                if (mOriginalHeight == 0) {
+                    mOriginalHeight = v.getHeight();
+                }
+                ValueAnimator valueAnimator;
+                if (v.getHeight() < (mOriginalHeight + (int) (mOriginalHeight * 0.5))) {
+                    valueAnimator = ValueAnimator.ofInt(mOriginalHeight, mOriginalHeight + (int) (mOriginalHeight * 0.5));
+                } else {
+                    valueAnimator = ValueAnimator.ofInt(mOriginalHeight + (int) (mOriginalHeight * 0.5), mOriginalHeight);
+                }
+                valueAnimator.setDuration(200);
+                valueAnimator.setInterpolator(new LinearInterpolator());
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        Integer value = (Integer) animation.getAnimatedValue();
+                        v.getLayoutParams().height = value.intValue();
+                        v.requestLayout();
+                    }
+                });
+                valueAnimator.start();
             }
         });
 
@@ -74,7 +104,35 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(CustomViewHolder holder, int position) {
+    public void onBindViewHolder(final CustomViewHolder viewHolder, final int position) {
+
+
+//        if (viewHolder.getItemViewType() == 1){
+//            View view = (View) viewHolder.date.getParent();
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (viewHolder.location.getVisibility() == View.VISIBLE) {
+//                        viewHolder.location.setVisibility(View.GONE);
+//                        notifyItemRangeRemoved(position + 1, 1);
+//                        //viewHolder.fromTime.setVisibility(View.GONE);
+//                    }else {
+//                        viewHolder.location.setVisibility(View.VISIBLE);
+//                        notifyItemRangeInserted(position + 1, 1);
+//                        // viewHolder.fromTime.setVisibility(View.VISIBLE);
+//                    }
+//                }
+//            });
+//            if (viewHolder.location.getVisibility() == View.VISIBLE) {
+//                viewHolder.location.setVisibility(View.GONE);
+//                notifyItemRangeRemoved(position, position + 1);
+//                //viewHolder.fromTime.setVisibility(View.GONE);
+//            }else {
+//                viewHolder.location.setVisibility(View.VISIBLE);
+//                notifyItemInserted(position);
+//                // viewHolder.fromTime.setVisibility(View.VISIBLE);
+//            }
+   //     }
 
     }
 

@@ -20,7 +20,7 @@
     <com.vipul.hp_hp.timelineview.TimelineView
         android:id="@+id/time_marker"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="35dp"
         android:paddingBottom="35dp"
         android:paddingLeft="15dp"
